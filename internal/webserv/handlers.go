@@ -38,7 +38,11 @@ func handleIncome(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.Method == http.MethodGet {
 		log.Println("hello GET")
-		database.SelectIncomes()
+		db := database.NewDB(nil)
+		database.SelectIncomes(db)
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte("ok"))
 	}
 	if r.Method == http.MethodPost {
 		log.Println("hello POST")
@@ -54,9 +58,10 @@ func handleIncome(w http.ResponseWriter, r *http.Request) {
 			log.Println("error to use unmarshall")
 		}
 
-		log.Println("Find:", income)
-
-		database.InsertIncome(*income)
-		log.Println("fim post")
+		db := database.NewDB(nil)
+		database.InsertIncome(db, *income)
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte("ok"))
 	}
 }

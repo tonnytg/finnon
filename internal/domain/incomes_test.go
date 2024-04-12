@@ -68,3 +68,14 @@ func TestIncome(t *testing.T) {
 		})
 	}
 }
+
+func TestIncomeService(t *testing.T) {
+
+	repo := domain.NewIncomeRepository()
+	service := domain.NewIncomeService(repo)
+	_, err := service.CreateIncome("teste", 1001, "testeSource", "testProvider", "testePaymentDate", "testType")
+	if err != nil {
+		t.Errorf("cannot create income")
+	}
+
+}

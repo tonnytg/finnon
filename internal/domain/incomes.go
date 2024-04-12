@@ -22,10 +22,6 @@ type Income struct {
 	CreatedAt   string  `json:"created_at"`
 }
 
-type IncomeInterface interface {
-	GetID()
-}
-
 func NewIncome(description string, amount float64, source, provider, paymentDate, incomeType string) *Income {
 	return &Income{
 		Description: description,

@@ -2,17 +2,32 @@ package database
 
 import (
 	"database/sql"
-	"finnon/internal/domain"
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func init() {
-	conn, err := sql.Open("sqlite3", "finnon.db")
-	if err != nil {
-		log.Println(err)
+type DB struct {
+	db *sql.DB
+}
+
+func NewDB(db *sql.DB) *DB {
+
+	if db == nil {
+		var err error
+		db, err = sql.Open("sqlite3", "finnon.db")
+		if err != nil {
+			log.Println("error to create connection with database sqlite3")
+		}
 	}
+	return &DB{
+		db,
+	}
+}
+
+func init() {
+
+	conn := NewDB(nil)
 
 	// Create table if not exist
 	createTableStatement := `
@@ -34,68 +49,14 @@ BEGIN
     UPDATE incomes SET created_at = DATETIME('now') WHERE id = NEW.id;
 END;
     `
-	_, err = conn.Exec(createTableStatement)
+	_, err := conn.db.Exec(createTableStatement)
 	if err != nil {
 		log.Println(err)
 	}
-}
-
-func InsertIncome(income domain.Income) {
-	conn, err := sql.Open("sqlite3", "finnon.db")
-	if err != nil {
-		log.Println(err)
-	}
-	stmt, err := conn.Prepare("INSERT INTO incomes (description, amount, source, provider, payment_date, type) VALUES (?, ?, ?, ?, ?, ?)")
-
-	if err != nil {
-		log.Println(err)
-	}
-	_, err = stmt.Exec(income.Description,
-		income.Amount,
-		income.Source,
-		income.Provider,
-		income.PaymentDate,
-		income.Type)
-
-	if err != nil {
-		log.Println(err)
-	}
-	log.Println("New income inserted")
-}
-
-func SelectIncomes() {
-
-	conn, err := sql.Open("sqlite3", "finnon.db")
-	if err != nil {
-		log.Println(err)
-	}
-	rows, err := conn.Query("SELECT * FROM incomes")
-	if err != nil {
-		log.Println("error to get information from clients")
-		return
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-
-		var income domain.Income
-
-		err = rows.Scan(
-			&income.ID,
-			&income.Description,
-			&income.Amount,
-			&income.Source,
-			&income.Provider,
-			&income.PaymentDate,
-			&income.Type,
-			&income.CreatedAt)
+	defer func(db *sql.DB) {
+		err := db.Close()
 		if err != nil {
-			log.Println("panic:", err)
+			log.Println("error to close connection in init")
 		}
-		log.Println("Income:", income)
-	}
-	if err = rows.Err(); err != nil {
-		log.Println("error to read rows:", err)
-	}
-	log.Println("finish loop in db")
+	}(conn.db)
 }

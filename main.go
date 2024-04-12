@@ -13,7 +13,7 @@ func main() {
 
 	service := domain.NewIncomeService(repo)
 
-	income, err := service.CreateIncome(1000, "teste002")
+	income, err := service.CreateIncome("salary", 1000, "company", "itau", "10/10/2024", "salary")
 	if err != nil {
 		log.Println("error with service and repository to save")
 	}

@@ -10,11 +10,9 @@ func NewIncomeService(repo IncomeRepositoryInterface) *IncomeService {
 	return &IncomeService{repo}
 }
 
-func (s *IncomeService) CreateIncome(amount float64, description string) (*Income, error) {
+func (s *IncomeService) CreateIncome(description string, amount float64, source string, provider string, paymentDate string, incomeType string) (*Income, error) {
 
-	income := &Income{}
-	income.SetAmount(amount)
-	income.SetDescription(description)
+	income := NewIncome(description, amount, source, provider, paymentDate, incomeType)
 	err := income.Validate()
 	if err != nil {
 		return nil, fmt.Errorf("sorry Income has error")
