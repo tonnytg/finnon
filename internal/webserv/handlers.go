@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"finnon/internal/database"
 	"finnon/internal/domain"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -58,10 +59,24 @@ func handleIncome(w http.ResponseWriter, r *http.Request) {
 			log.Println("error to use unmarshall")
 		}
 
-		db := database.NewDB(nil)
-		database.InsertIncome(db, *income)
+		repo := database.NewIncomeRepositorySQLite()
+		service := domain.NewIncomeService(repo)
+
+		_, err = service.CreateIncome(income.Description,
+			income.Amount,
+			income.Source,
+			income.Provider,
+			income.PaymentDate,
+			income.Type)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			fmt.Fprintf(w, "error")
+			w.Header().Set("Content-Type", "application/json")
+			return
+		}
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte("ok"))
+		fmt.Fprintf(w, "ok")
+		return
 	}
 }
