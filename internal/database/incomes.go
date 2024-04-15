@@ -26,14 +26,16 @@ func InsertIncome(db *DB, income domain.Income) {
 	log.Println("New income inserted")
 }
 
-func SelectIncomes(db *DB) {
+func SelectIncomes(db *DB) []domain.Income {
 
 	conn := db
+
+	var incomes []domain.Income
 
 	rows, err := conn.db.Query("SELECT * FROM incomes")
 	if err != nil {
 		log.Println("error to get information from clients")
-		return
+		return nil
 	}
 	defer rows.Close()
 
@@ -54,9 +56,11 @@ func SelectIncomes(db *DB) {
 			log.Println("panic:", err)
 		}
 		log.Println("Income:", income)
+		incomes = append(incomes, income)
 	}
 	if err = rows.Err(); err != nil {
 		log.Println("error to read rows:", err)
 	}
 	log.Println("finish loop in db")
+	return incomes
 }

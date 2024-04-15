@@ -38,12 +38,14 @@ func handleIncome(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if r.Method == http.MethodGet {
-		log.Println("hello GET")
 		db := database.NewDB(nil)
-		database.SelectIncomes(db)
+		incomes := database.SelectIncomes(db)
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte("ok"))
+
+		jsonIncomes, _ := json.Marshal(incomes)
+
+		w.Write(jsonIncomes)
 	}
 	if r.Method == http.MethodPost {
 		log.Println("hello POST")
