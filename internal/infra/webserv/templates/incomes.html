@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transações</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Transações</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Fonte</th>
+            <th>Data de Pagamento</th>
+            <th>Fornecedor</th>
+            <th>Tipo</th>
+            <th>Data de Criação</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{range .}}
+        <tr>
+            <td>{{.ID}}</td>
+            <td>{{.Description}}</td>
+            <td>{{.Amount}}</td>
+            <td>{{.Source}}</td>
+            <td>{{.PaymentDate}}</td>
+            <td>{{.Provider}}</td>
+            <td>{{.Type}}</td>
+            <td>{{.CreatedAt}}</td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

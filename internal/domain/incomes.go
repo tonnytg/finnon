@@ -86,6 +86,10 @@ func (i *Income) SetProvider(provider string) {
 	i.Provider = provider
 }
 
+func (i *Income) SetPaymentDate(paymentDate string) {
+	i.PaymentDate = paymentDate
+}
+
 func (i *Income) SetType(incomeType string) {
 	i.Type = incomeType
 }
