@@ -1,7 +1,7 @@
 package main
 
 import (
-	"finnon/internal/webserv"
+	"finnon/internal/infra/webserv"
 	"log"
 )
 

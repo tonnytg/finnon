@@ -2,8 +2,8 @@ package webserv
 
 import (
 	"encoding/json"
-	"finnon/internal/database"
 	"finnon/internal/domain"
+	database2 "finnon/internal/infra/database"
 	"fmt"
 	"io"
 	"log"
@@ -38,17 +38,17 @@ func handleIncome(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if r.Method == http.MethodGet {
-		db := database.NewDB(nil)
-		incomes := database.SelectIncomes(db)
+		db := database2.NewDB(nil)
+		incomes := database2.SelectIncomes(db)
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 
 		jsonIncomes, _ := json.Marshal(incomes)
 
-		w.Write(jsonIncomes)
+		_, _ = w.Write(jsonIncomes)
+
 	}
 	if r.Method == http.MethodPost {
-		log.Println("hello POST")
 
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
@@ -61,7 +61,7 @@ func handleIncome(w http.ResponseWriter, r *http.Request) {
 			log.Println("error to use unmarshall")
 		}
 
-		repo := database.NewIncomeRepositorySQLite()
+		repo := database2.NewIncomeRepositorySQLite()
 		service := domain.NewIncomeService(repo)
 
 		_, err = service.CreateIncome(income.Description,
@@ -72,13 +72,13 @@ func handleIncome(w http.ResponseWriter, r *http.Request) {
 			income.Type)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			fmt.Fprintf(w, "error")
+			_, _ = fmt.Fprintf(w, "error")
 			w.Header().Set("Content-Type", "application/json")
 			return
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprintf(w, "ok")
+		_, _ = fmt.Fprintf(w, "ok")
 		return
 	}
 }
