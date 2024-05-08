@@ -8,7 +8,7 @@ import (
 func InsertIncome(db *DB, income domain.Income) {
 
 	conn := db
-	stmt, err := conn.db.Prepare("INSERT INTO incomes (description, amount, source, provider, payment_date, type) VALUES (?, ?, ?, ?, ?, ?)")
+	stmt, err := conn.Db.Prepare("INSERT INTO incomes (description, amount, source, provider, payment_date, type) VALUES (?, ?, ?, ?, ?, ?)")
 
 	if err != nil {
 		log.Println(err)
@@ -32,7 +32,7 @@ func SelectIncomes(db *DB) []domain.Income {
 
 	var incomes []domain.Income
 
-	rows, err := conn.db.Query("SELECT * FROM incomes")
+	rows, err := conn.Db.Query("SELECT * FROM incomes")
 	if err != nil {
 		log.Println("error to get information from clients")
 		return nil
@@ -61,6 +61,5 @@ func SelectIncomes(db *DB) []domain.Income {
 	if err = rows.Err(); err != nil {
 		log.Println("error to read rows:", err)
 	}
-	log.Println("finish loop in db")
 	return incomes
 }

@@ -13,6 +13,6 @@ func NewIncomeRepository() *IncomeRepository {
 }
 
 func (r *IncomeRepository) Save(income *Income) error {
-	log.Println("income:", income, "passwd in IncomeRepository.")
+	log.Println("income:", income, "pass in IncomeRepository.")
 	return nil
 }

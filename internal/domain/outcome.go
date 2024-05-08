@@ -1,5 +1,10 @@
 package domain
 
+import (
+	"errors"
+	"time"
+)
+
 type Outcome struct {
 	ID               int     `json:"id"`
 	Description      string  `json:"description"`
@@ -11,9 +16,37 @@ type Outcome struct {
 	TotalInstallment uint    `json:"total_installment"`
 	PaidAt           string  `json:"paid_at"`
 	Category         string  `json:"category"`
-	Type             string  `json:"type"`
+	TypeOutcome      string  `json:"type"`
 	Repeat           bool    `json:"repeat"`
 	CreatedAt        string  `json:"created_at"`
+}
+
+func NewOutcome(
+	description string,
+	amount float64,
+	tax float64,
+	isPayed bool,
+	companyName string,
+	installment uint,
+	totalInstallment uint,
+	paidAt string,
+	category string,
+	typeOutcome string,
+	repeat bool) *Outcome {
+	return &Outcome{
+		Description:      description,
+		Amount:           amount,
+		Tax:              tax,
+		IsPayed:          isPayed,
+		CompanyName:      companyName,
+		Installment:      installment,
+		TotalInstallment: totalInstallment,
+		PaidAt:           paidAt,
+		Category:         category,
+		TypeOutcome:      typeOutcome,
+		Repeat:           repeat,
+		CreatedAt:        time.Now().Format("2006-01-02 15:04:05"),
+	}
 }
 
 func (o *Outcome) GetID() int {
@@ -97,11 +130,11 @@ func (o *Outcome) SetCategory(category string) {
 }
 
 func (o *Outcome) GetType() string {
-	return o.Type
+	return o.TypeOutcome
 }
 
-func (o *Outcome) SetType(_type string) {
-	o.Type = _type
+func (o *Outcome) SetType(typeOutcome string) {
+	o.TypeOutcome = typeOutcome
 }
 
 func (o *Outcome) GetRepeat() bool {
@@ -118,4 +151,11 @@ func (o *Outcome) GetCreatedAt() string {
 
 func (o *Outcome) SetCreatedAt(createdAt string) {
 	o.CreatedAt = createdAt
+}
+
+func (o *Outcome) Validate() error {
+	if o.Amount == 0 || o.Description == "" || o.TotalInstallment == 0 || o.Installment == 0 || o.Category == "" {
+		return errors.New("outcome cannot has empty values")
+	}
+	return nil
 }

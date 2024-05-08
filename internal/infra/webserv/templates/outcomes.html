@@ -7,17 +7,22 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Incomes</h2>
+    <h2>Outcomes</h2>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>ID</th>
             <th>Description</th>
             <th>Value</th>
-            <th>Source</th>
-            <th>Payment Date</th>
-            <th>Provider</th>
+            <th>Tax</th>
+            <th>IsPaid</th>
+            <th>Company Name</th>
+            <th>Installment</th>
+            <th>TotalInstallment</th>
+            <th>Paid At</th>
+            <th>Category</th>
             <th>Type</th>
+            <th>Repeat</th>
             <th>Create At</th>
         </tr>
         </thead>
@@ -27,10 +32,15 @@
             <td>{{.ID}}</td>
             <td>{{.Description}}</td>
             <td>{{.Amount}}</td>
-            <td>{{.Source}}</td>
-            <td>{{.PaymentDate}}</td>
-            <td>{{.Provider}}</td>
-            <td>{{.Type}}</td>
+            <td>{{.Tax}}</td>
+            <td>{{.IsPayed}}</td>
+            <td>{{.CompanyName}}</td>
+            <td>{{.Installment}}</td>
+            <td>{{.TotalInstallment}}</td>
+            <td>{{.PaidAt}}</td>
+            <td>{{.Category}}</td>
+            <td>{{.TypeOutcome}}</td>
+            <td>{{.Repeat}}</td>
             <td>{{.CreatedAt}}</td>
         </tr>
         {{end}}
