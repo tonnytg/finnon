@@ -1,4 +1,4 @@
-package webserv
+package webserver
 
 import (
 	"encoding/json"
@@ -14,11 +14,11 @@ import (
 func handleIndex(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.New("index.html").ParseFiles(
-		"./internal/infra/webserv/templates/index.html"))
+		"./internal/infra/webserver/templates/index.html"))
 
-	result_data := database.SelectResult(database.NewDB(nil))
+	resultData := database.SelectResult(database.NewDB(nil))
 
-	if err := tmpl.Execute(w, result_data); err != nil {
+	if err := tmpl.Execute(w, resultData); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
@@ -29,17 +29,17 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodOptions {
 		log.Println("method OPTIONS")
-		// TODO: what do you wnat to do with OPTIONS
+		// TODO: what do you want to do with OPTIONS
 		return
 	}
 	if r.Method == http.MethodGet {
 		log.Println("method GET")
-		// TODO: what do you wnat to do with GET
+		// TODO: what do you want to do with GET
 		log.Println(r)
 	}
 	if r.Method == http.MethodPost {
 		log.Println("method POST")
-		// TODO: what do you wnat to do with POST
+		// TODO: what do you want to do with POST
 		log.Println(r)
 	}
 }
@@ -50,7 +50,7 @@ func handleIncomes(w http.ResponseWriter, r *http.Request) {
 	incomes := database.SelectIncomes(db)
 
 	tmpl := template.Must(template.New("incomes.html").ParseFiles(
-		"./internal/infra/webserv/templates/incomes.html"))
+		"./internal/infra/webserver/templates/incomes.html"))
 	if err := tmpl.Execute(w, incomes); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -78,7 +78,7 @@ func handleOutcomes(w http.ResponseWriter, r *http.Request) {
 	outcomes := database.SelectOutcomes(db)
 
 	tmpl := template.Must(template.New("outcomes.html").ParseFiles(
-		"./internal/infra/webserv/templates/outcomes.html"))
+		"./internal/infra/webserver/templates/outcomes.html"))
 	if err := tmpl.Execute(w, outcomes); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

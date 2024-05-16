@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"finnon/internal/infra/database"
-	"finnon/internal/infra/webserv"
+	"finnon/internal/infra/webserver"
 	"log"
 )
 
@@ -37,5 +37,5 @@ func init() {
 func main() {
 	log.Println("Start Finnon")
 
-	webserv.Start()
+	webserver.Start()
 }
