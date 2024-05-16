@@ -15,7 +15,10 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.New("index.html").ParseFiles(
 		"./internal/infra/webserv/templates/index.html"))
-	if err := tmpl.Execute(w, nil); err != nil {
+
+	result_data := database.SelectResult(database.NewDB(nil))
+
+	if err := tmpl.Execute(w, result_data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
