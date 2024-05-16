@@ -11,8 +11,6 @@ func init() {
 
 	conn := database.NewDB(nil)
 
-	// Create table if not exist
-
 	_, err := conn.Db.Exec(database.CreateTableStatementIncomes)
 	if err != nil {
 		log.Println(err)
