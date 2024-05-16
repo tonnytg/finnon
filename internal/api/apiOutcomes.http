@@ -6,13 +6,13 @@ Content-Type: application/json
 
 {
   "description":"bills with bank",
-  "amount": 100,
+  "amount": 101,
   "tax": 10,
   "is_payed": true,
   "company_name":"bank",
   "installment": 1,
   "total_installment":10,
-  "paid_at": "10/10/2024T10:10",
+  "paid_at": "2024-05-08T03:27:13Z",
   "category":"Food",
   "type": "Restaurant",
   "repeat": ""

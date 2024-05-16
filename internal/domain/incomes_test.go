@@ -2,6 +2,7 @@ package domain_test
 
 import (
 	"finnon/internal/domain"
+	"finnon/internal/infra/database"
 	"testing"
 )
 
@@ -71,7 +72,7 @@ func TestIncome(t *testing.T) {
 
 func TestIncomeService(t *testing.T) {
 
-	repo := domain.NewIncomeRepository()
+	repo := database.NewIncomeRepositorySQLiteMemory()
 	service := domain.NewIncomeService(repo)
 	_, err := service.CreateIncome("teste", 1001, "testeSource", "testProvider", "testePaymentDate", "testType")
 	if err != nil {

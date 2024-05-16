@@ -18,7 +18,7 @@ func InsertIncome(db *DB, income domain.Income) {
 		income.Source,
 		income.Provider,
 		income.PaymentDate,
-		income.Type)
+		income.TypeIncome)
 
 	if err != nil {
 		log.Println(err)
@@ -50,7 +50,7 @@ func SelectIncomes(db *DB) []domain.Income {
 			&income.Source,
 			&income.Provider,
 			&income.PaymentDate,
-			&income.Type,
+			&income.TypeIncome,
 			&income.CreatedAt)
 		if err != nil {
 			log.Println("panic:", err)

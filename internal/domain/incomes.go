@@ -18,7 +18,7 @@ type Income struct {
 	Source      string  `json:"source"`
 	PaymentDate string  `json:"payment_date"`
 	Provider    string  `json:"provider"`
-	Type        string  `json:"type"`
+	TypeIncome  string  `json:"type_income"`
 	CreatedAt   string  `json:"created_at"`
 }
 
@@ -29,7 +29,7 @@ func NewIncome(description string, amount float64, source, provider, paymentDate
 		Source:      source,
 		Provider:    provider,
 		PaymentDate: paymentDate,
-		Type:        incomeType,
+		TypeIncome:  incomeType,
 		CreatedAt:   time.Now().Format("2006-01-02 15:04:05"),
 	}
 }
@@ -59,7 +59,7 @@ func (i *Income) GetPaymentDate() string {
 }
 
 func (i *Income) GetType() string {
-	return i.Type
+	return i.TypeIncome
 }
 
 func (i *Income) GetCreatedAt() string {
@@ -91,7 +91,7 @@ func (i *Income) SetPaymentDate(paymentDate string) {
 }
 
 func (i *Income) SetType(incomeType string) {
-	i.Type = incomeType
+	i.TypeIncome = incomeType
 }
 
 func (i *Income) Validate() error {

@@ -20,6 +20,18 @@ func (r *IncomeRepositorySQLiteMemory) Save(income *domain.Income) error {
 		return fmt.Errorf("error to save in database sqlite3")
 	}
 
+	// Create table if not exist
+
+	_, err = db.Exec(CreateTableStatementIncomes)
+	if err != nil {
+		log.Println(err)
+	}
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+			log.Println("error to close connection in init memory sqlite3")
+		}
+	}(db)
 	stmt, err := db.Prepare("INSERT INTO incomes (amount, description) VALUES (?, ?)")
 	if err != nil {
 		log.Println("error to create smtp")

@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS incomes (
     source TEXT,
     provider TEXT,
     payment_date DATE,
-    type TEXT,
+    typeIncome TEXT,
     created_at DATETIME
 );
 

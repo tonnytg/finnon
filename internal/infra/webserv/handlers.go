@@ -135,7 +135,7 @@ func handleAPIIncomes(w http.ResponseWriter, r *http.Request) {
 			income.Source,
 			income.Provider,
 			income.PaymentDate,
-			income.Type)
+			income.TypeIncome)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			_, _ = fmt.Fprintf(w, "error")

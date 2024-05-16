@@ -16,7 +16,7 @@ type Outcome struct {
 	TotalInstallment uint    `json:"total_installment"`
 	PaidAt           string  `json:"paid_at"`
 	Category         string  `json:"category"`
-	TypeOutcome      string  `json:"type"`
+	TypeOutcome      string  `json:"type_outcome"`
 	Repeat           bool    `json:"repeat"`
 	CreatedAt        string  `json:"created_at"`
 }

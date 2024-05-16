@@ -21,7 +21,7 @@ func (r *IncomeRepositorySQLite) Save(income *domain.Income) error {
 	}
 
 	stmt, err := db.Prepare(
-		"INSERT INTO incomes (description, amount, source, payment_date, provider, type, created_at) VALUES (?, ?, ?, ?, ?, ?)")
+		"INSERT INTO incomes (description, amount, source, payment_date, provider, typeIncome, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		log.Println("error to create stmt")
 	}
@@ -32,7 +32,7 @@ func (r *IncomeRepositorySQLite) Save(income *domain.Income) error {
 		income.Source,
 		income.PaymentDate,
 		income.Provider,
-		income.Type,
+		income.TypeIncome,
 		income.CreatedAt)
 	if err != nil {
 		log.Println("error to execute stmt")
