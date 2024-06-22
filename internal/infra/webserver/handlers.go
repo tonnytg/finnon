@@ -100,6 +100,16 @@ func handleOutcomes(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func handleIncome(w http.ResponseWriter, r *http.Request) {
+
+	tmpl := template.Must(template.New("income_form.html").ParseFiles(
+		"./internal/infra/webserver/templates/income_form.html"))
+	if err := tmpl.Execute(w, nil); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+}
+
 func handleAPIIncomes(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodOptions {
@@ -150,6 +160,16 @@ func handleAPIIncomes(w http.ResponseWriter, r *http.Request) {
 		_, _ = fmt.Fprintf(w, "{\"message\":\"created\"}")
 		return
 	}
+}
+
+func handleOutcome(w http.ResponseWriter, r *http.Request) {
+
+	tmpl := template.Must(template.New("outcome_form.html").ParseFiles(
+		"./internal/infra/webserver/templates/outcome_form.html"))
+	if err := tmpl.Execute(w, nil); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
 }
 
 func handleAPIOutcomes(w http.ResponseWriter, r *http.Request) {
