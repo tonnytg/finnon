@@ -2,61 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Outcome Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div>
-    <form id="outcome-form">
-        <label>Description:</label>
-        <input name="description" id="description">
-        <br />
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h3>Outcome Form</h3>
+        </div>
+        <div class="card-body">
+            <form id="outcome-form">
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" class="form-control" name="description" id="description" placeholder="Enter description" required>
+                </div>
 
-        <label>Amount:</label>
-        <input name="amount" id="amount" type="number" step="0.01">
-        <br />
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" class="form-control" name="amount" id="amount" placeholder="Enter amount" step="0.01" required>
+                </div>
 
-        <label>Tax:</label>
-        <input name="tax" id="tax" type="number" step="0.01">
-        <br />
+                <div class="form-group">
+                    <label for="tax">Tax:</label>
+                    <input type="number" class="form-control" name="tax" id="tax" placeholder="Enter tax" step="0.01">
+                </div>
 
-        <label>Is Payed:</label>
-        <input name="is_payed" id="is_payed" type="checkbox">
-        <br />
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="is_payed" id="is_payed">
+                    <label class="form-check-label" for="is_payed">Is Payed</label>
+                </div>
 
-        <label>Company Name:</label>
-        <input name="company_name" id="company_name">
-        <br />
+                <div class="form-group">
+                    <label for="company_name">Company Name:</label>
+                    <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Enter company name">
+                </div>
 
-        <label>Installment:</label>
-        <input name="installment" id="installment" type="number">
-        <br />
+                <div class="form-group">
+                    <label for="installment">Installment:</label>
+                    <input type="number" class="form-control" name="installment" id="installment" placeholder="Enter installment">
+                </div>
 
-        <label>Total Installment:</label>
-        <input name="total_installment" id="total_installment" type="number">
-        <br />
+                <div class="form-group">
+                    <label for="total_installment">Total Installment:</label>
+                    <input type="number" class="form-control" name="total_installment" id="total_installment" placeholder="Enter total installment">
+                </div>
 
-        <label>Paid At:</label>
-        <input name="paid_at" id="paid_at" type="date">
-        <br />
+                <div class="form-group">
+                    <label for="paid_at">Paid At:</label>
+                    <input type="date" class="form-control" name="paid_at" id="paid_at">
+                </div>
 
-        <label>Category:</label>
-        <input name="category" id="category">
-        <br />
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" class="form-control" name="category" id="category" placeholder="Enter category">
+                </div>
 
-        <label>Type of Outcome:</label>
-        <input name="type_outcome" id="type_outcome">
-        <br />
+                <div class="form-group">
+                    <label for="type_outcome">Type of Outcome:</label>
+                    <input type="text" class="form-control" name="type_outcome" id="type_outcome" placeholder="Enter type of outcome">
+                </div>
 
-        <label>Repeat:</label>
-        <input name="repeat" id="repeat" type="checkbox">
-        <br />
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="repeat" id="repeat">
+                    <label class="form-check-label" for="repeat">Repeat</label>
+                </div>
 
-        <button type="submit">Enviar</button>
-    </form>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
     document.getElementById('outcome-form').addEventListener('submit', function(event) {
@@ -87,6 +111,7 @@
             .then(data => {
                 console.log('Success:', data);
                 alert('Outcome added successfully');
+                document.getElementById('outcome-form').reset();
             })
             .catch((error) => {
                 console.error('Error:', error);
