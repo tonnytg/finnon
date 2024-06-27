@@ -4,9 +4,7 @@
 Finnon é uma API desenvolvida para facilitar o gerenciamento de entradas (incomes) e saídas (outcomes) financeiras. Este sistema é ideal para usuários que desejam ter um controle detalhado de suas finanças pessoais ou empresariais.
 
 ## Tecnologias Utilizadas
-- Node.js
-- Express
-- MongoDB
+- Go
 
 ## Funcionalidades
 - Cadastrar, listar e gerenciar receitas e despesas.
@@ -18,9 +16,7 @@ Para iniciar o projeto localmente, siga os passos abaixo:
 
 ### Pré-requisitos
 
-Antes de iniciar, você precisará ter instalado em sua máquina as seguintes ferramentas:
-- [Git](https://git-scm.com)
-- [Node.js](https://nodejs.org/en/)
+- Go 1.21
 
 Além disso, é bom ter um editor para trabalhar com o código, como [VSCode](https://code.visualstudio.com/).
 
