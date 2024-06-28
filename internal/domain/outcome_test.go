@@ -6,8 +6,8 @@ import (
 	"testing"
 )
 
-func TestOutcome(t *testing.T) {
-	outcome := domain.Outcome{
+func TestOutcomeValidation(t *testing.T) {
+	validOutcome := domain.Outcome{
 		Description:      "test",
 		Amount:           100,
 		Tax:              0,
@@ -22,20 +22,21 @@ func TestOutcome(t *testing.T) {
 		CreatedAt:        "10/10/2024T10:10",
 	}
 
-	if err := outcome.Validate(); err != nil {
-		t.Errorf("Outcome validation failed: %v", err)
+	if err := validOutcome.Validate(); err != nil {
+		t.Errorf("Valid outcome validation failed: %v", err)
 	}
 
 	invalidOutcome := domain.Outcome{
 		Description: "",
+		Amount:      0,
 	}
 
 	if err := invalidOutcome.Validate(); err == nil {
-		t.Errorf("Expected validation error for invalid Outcome, but got none")
+		t.Errorf("Expected validation error for invalid outcome, but got none")
 	}
 }
 
-func TestOutcomeRepository(t *testing.T) {
+func TestCreateUpdateDeleteOutcome(t *testing.T) {
 	repo := database.NewOutcomeRepositorySQLiteMemory()
 	service := domain.NewOutcomeService(repo)
 
@@ -54,31 +55,31 @@ func TestOutcomeRepository(t *testing.T) {
 		t.Errorf("Error in service to create outcome: %v", err)
 	}
 
-	// Test updating the outcome
-	outcome.Description = "updated description"
-	err = service.UpdateOutcome(outcome)
-	if err != nil {
-		t.Errorf("Error updating outcome: %v", err)
-	}
+	t.Run("Update Outcome", func(t *testing.T) {
+		outcome.Description = "updated description"
+		err = service.UpdateOutcome(outcome)
+		if err != nil {
+			t.Errorf("Error updating outcome: %v", err)
+		}
 
-	// Test finding the updated outcome
-	updatedOutcome, err := service.FindOutcomeByID(outcome.ID)
-	if err != nil {
-		t.Errorf("Error finding outcome: %v", err)
-	}
-	if updatedOutcome.Description != "updated description" {
-		t.Errorf("Expected description to be 'updated description', but got %v", updatedOutcome.Description)
-	}
+		updatedOutcome, err := service.FindOutcomeByID(outcome.ID)
+		if err != nil {
+			t.Errorf("Error finding outcome: %v", err)
+		}
+		if updatedOutcome.Description != "updated description" {
+			t.Errorf("Expected description to be 'updated description', but got %v", updatedOutcome.Description)
+		}
+	})
 
-	// Test deleting the outcome
-	err = service.DeleteOutcome(outcome.ID)
-	if err != nil {
-		t.Errorf("Error deleting outcome: %v", err)
-	}
+	t.Run("Delete Outcome", func(t *testing.T) {
+		err = service.DeleteOutcome(outcome.ID)
+		if err != nil {
+			t.Errorf("Error deleting outcome: %v", err)
+		}
 
-	// Test finding the deleted outcome
-	_, err = service.FindOutcomeByID(outcome.ID)
-	if err == nil {
-		t.Errorf("Expected error when finding deleted outcome, but got none")
-	}
+		_, err = service.FindOutcomeByID(outcome.ID)
+		if err == nil {
+			t.Errorf("Expected error when finding deleted outcome, but got none")
+		}
+	})
 }
