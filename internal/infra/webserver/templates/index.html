@@ -10,23 +10,43 @@
 
     <div class="container mt-5">
         <h2>Results</h2>
+
+        <!-- Formulário de filtros -->
+        <form action="/filter" method="GET" class="mb-3">
+            <div class="row g-3">
+                <div class="col-auto">
+                    <label for="startDate" class="visually-hidden">Start Date</label>
+                    <input type="text" class="form-control" id="startDate" name="startDate" placeholder="Start Date">
+                </div>
+                <div class="col-auto">
+                    <label for="endDate" class="visually-hidden">End Date</label>
+                    <input type="text" class="form-control" id="endDate" name="endDate" placeholder="End Date">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Tabela de resultados -->
         <table class="table table-striped">
             <thead>
-            <tr>
-                <th>Incomes</th>
-                <th>Outcomes</th>
-                <th>Result</th>
-            </tr>
+                <tr>
+                    <th>Incomes</th>
+                    <th>Outcomes</th>
+                    <th>Result</th>
+                </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>{{.Incomes}}</td>
-                <td>{{.Outcomes}}</td>
-                <td>{{.Result}}</td>
-            </tr>
+                <tr>
+                    <td>{{.Incomes}}</td>
+                    <td>{{.Outcomes}}</td>
+                    <td>{{.Result}}</td>
+                </tr>
             </tbody>
         </table>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
