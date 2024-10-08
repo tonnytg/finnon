@@ -26,3 +26,9 @@ Além disso, é bom ter um editor para trabalhar com o código, como [VSCode](ht
 ```bash
 git clone https://github.com/tonnytg/finnon.git
 cd finnon
+```
+
+
+#### Demo
+
+![demo-incomes](./docs/incomes.png)

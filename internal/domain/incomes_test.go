@@ -1,3 +1,5 @@
+package domain
+
 func TestIncome(t *testing.T) {
 	tests := []struct {
 		ID          int
