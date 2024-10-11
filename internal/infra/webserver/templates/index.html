@@ -28,6 +28,40 @@
             </div>
         </form>
 
+        <h2>Incomes</h2>
+        
+        <form action="/incomes" method="POST" class="mb-3" id="incomeForm">
+            <div class="row g-3">
+                <div class="col-auto">
+                    <label for="description" class="visually-hidden">Description</label>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Description" required>
+                </div>
+                <div class="col-auto">
+                    <label for="amount" class="visually-hidden">Amount</label>
+                    <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount" required>
+                </div>
+                <div class="col-auto">
+                    <label for="source" class="visually-hidden">Source</label>
+                    <input type="text" class="form-control" id="source" name="source" placeholder="Source" required>
+                </div>
+                <div class="col-auto">
+                    <label for="provider" class="visually-hidden">Provider</label>
+                    <input type="text" class="form-control" id="provider" name="provider" placeholder="Provider" required>
+                </div>
+                <div class="col-auto">
+                    <label for="paymentDate" class="visually-hidden">Payment Date</label>
+                    <input type="date" class="form-control" id="paymentDate" name="paymentDate" required>
+                </div>
+                <div class="col-auto">
+                    <label for="typeIncome" class="visually-hidden">Type</label>
+                    <input type="text" class="form-control" id="typeIncome" name="typeIncome" placeholder="Type" required>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+
         <!-- Tabela de resultados -->
         <table class="table table-striped">
             <thead>
