@@ -16,7 +16,7 @@ func Start() {
 	http.HandleFunc("/api/v1/outcomes", handleAPIOutcomes)
 	http.HandleFunc("/outcome", handleOutcome)
 
-	log.Println("Start web server :8089")
+    log.Println("Start web server http://localhost:8089")
 	if err := http.ListenAndServe(":8089", nil); err != nil {
 		log.Panicln()
 	}
