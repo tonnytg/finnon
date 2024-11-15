@@ -46,8 +46,11 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 
 func handleIncomes(w http.ResponseWriter, r *http.Request) {
 
+    log.Println("incomes access")
+
 	db := database.NewDB(nil)
 	incomes := database.SelectIncomes(db)
+    log.Println(incomes)
 
 	tmpl := template.Must(template.New("incomes.html").ParseFiles(
 		"./internal/infra/webserver/templates/incomes.html"))
